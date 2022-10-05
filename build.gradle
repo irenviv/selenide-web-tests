@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id "io.qameta.allure" version "2.11.0"
+}
+
+defaultTasks 'clean', 'test'
+
+group 'com.rozetka'
+version '1.0-SNAPSHOT'
+
+//Project.name='selenide-web-tests'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation group: 'com.codeborne', name: 'selenide', version: '6.8.1'
+    //for simple text report
+    testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.32'
+
+    //for allure report
+    testImplementation group: 'io.qameta.allure', name: 'allure-selenide', version: '2.13.6'
+    testImplementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.13.6'
+    testImplementation group: 'io.qameta.allure', name: 'allure-java-commons', version: '2.13.6'
+    runtimeOnly group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.5'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+//task chrome(type: Test) {
+//    systemProperties['selenide.browser'] = 'chrome'
+//    systemProperties['selenide.headless'] = 'false'
+//}
+//
+//task firefox(type: Test) {
+//    systemProperties['selenide.browser'] = 'firefox'
+//    systemProperties['selenide.headless'] = 'true'
+//}
+//
+//task ie(type: Test) {
+//    systemProperties['selenide.browser'] = 'ie'
+//}
