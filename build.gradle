@@ -35,11 +35,11 @@ test {
     useJUnitPlatform()
 }
 
-//task chrome(type: Test) {
-//    systemProperties['selenide.browser'] = 'chrome'
-//    systemProperties['selenide.headless'] = 'false'
-//}
-//
+task chrome(type: Test) {
+   systemProperties['selenide.browser'] = 'chrome'
+    systemProperties['selenide.headless'] = 'true'
+}
+
 //task firefox(type: Test) {
 //    systemProperties['selenide.browser'] = 'firefox'
 //    systemProperties['selenide.headless'] = 'true'
