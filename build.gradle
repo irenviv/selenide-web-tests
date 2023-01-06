@@ -37,15 +37,15 @@ test {
 }
 
 task chrome(type: Test) {
-    systemProperties['selenide.browser'] = 'chrome'
-    systemProperties['selenide.headless'] = 'false'
-}
-//
-task firefox(type: Test) {
-    systemProperties['selenide.browser'] = 'firefox'
+   systemProperties['selenide.browser'] = 'chrome'
     systemProperties['selenide.headless'] = 'true'
 }
 
+//task firefox(type: Test) {
+//    systemProperties['selenide.browser'] = 'firefox'
+//    systemProperties['selenide.headless'] = 'true'
+//}
+//
 //task ie(type: Test) {
 //    systemProperties['selenide.browser'] = 'ie'
 //}
