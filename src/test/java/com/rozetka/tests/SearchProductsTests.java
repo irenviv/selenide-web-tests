@@ -1,12 +1,15 @@
-package com.rozetka;
+package com.rozetka.tests;
 
+import com.rozetka.pages.CartModalWindowPage;
+import com.rozetka.pages.HomePage;
+import com.rozetka.pages.SearchResultsPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.clearBrowserCookies;
 import static com.codeborne.selenide.Selenide.open;
 
-public class SearchProductsTests extends BaseTest{
+public class SearchProductsTests extends BaseTest {
 
     private final String searchInput = "asus";
     SearchResultsPage resultsPage = new SearchResultsPage();

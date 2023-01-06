@@ -1,4 +1,4 @@
-package com.rozetka;
+package com.rozetka.pages;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class SearchResultsPage {
 
     private final ElementsCollection productsInCatalog = $$("ul.catalog-grid > li");
+
 
     public ElementsCollection getProductsInCatalog() {
         return productsInCatalog;

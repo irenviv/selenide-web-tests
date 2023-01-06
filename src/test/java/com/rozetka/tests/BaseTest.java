@@ -1,4 +1,4 @@
-package com.rozetka;
+package com.rozetka.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
