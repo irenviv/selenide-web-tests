@@ -3,6 +3,10 @@ package com.google;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static com.codeborne.selenide.Selenide.*;
 
 @Tag("UI")
@@ -13,7 +17,6 @@ public class GoogleCalculator {
     @BeforeAll
     public static void beforeSuite(){
         Configuration.headless = false;
-
     }
 
     @BeforeEach
@@ -33,24 +36,14 @@ public class GoogleCalculator {
         Assertions.assertEquals(result, Integer.parseInt(actualResult));
     }
 
-
-    @Test
-    public void additionValuesTest(){
-        assertValuesResult("10+5", 15);
-    }
-
-    @Test
-    public void subtractionValuesTest(){
-        assertValuesResult("10-5", 5);
-    }
-
-    @Test
-    public void multiplicationValuesTest(){
-        assertValuesResult("10*5", 50);
-    }
-
-    @Test
-    public void divisionValuesTest(){
-        assertValuesResult("10/5", 2);
+    @ParameterizedTest
+    @CsvSource(value = {
+            "10+5, 15",
+            "10-5, 5",
+            "10*5, 50",
+            "10/5, 2"
+    })
+    public void calculateValuesTest(String calcValues, int result){
+        assertValuesResult(calcValues, result);
     }
 }
