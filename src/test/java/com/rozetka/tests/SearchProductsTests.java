@@ -31,7 +31,7 @@ public class SearchProductsTests extends BaseTest {
     @Test
     void verifySearchedProductPriceAndAvailability(){
         resultsPage.checkProductPriceInCatalog(1);
-        resultsPage.checkProductIsAvailableInCatalog(1);
+        Assertions.assertTrue(resultsPage.isProductAvailableInCatalog(1));
     }
 
     @Test

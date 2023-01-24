@@ -25,8 +25,8 @@ public class SearchResultsPage {
         $(".search-header>h1").shouldHave(text(searchInput));
     }
 
-    public void checkProductIsAvailableInCatalog(int productIndex){
-        productsInCatalog.get(productIndex).$("div.goods-tile__availability--available")
+    public boolean isProductAvailableInCatalog(int productIndex){
+        return productsInCatalog.get(productIndex).$("div.goods-tile__availability--available")
                 .isDisplayed();
     }
 
@@ -43,18 +43,18 @@ public class SearchResultsPage {
         productsInCatalog.get(productIndex).$(".buy-button").click();
     }
 
-    public void checkBuyButtonChangedState(int productIndex){
-        productsInCatalog.get(productIndex).$(".buy-button_state_in-cart").isDisplayed();
+    public void checkBuyButtonExists(int productIndex){
+         productsInCatalog.get(productIndex).$(".buy-button_state_in-cart").shouldBe(exist);
     }
 
-    public void checkAddProductNotification(){
-        $("ul.notification__list").isDisplayed();
+    public void checkAddProductNotificationAppears(){
+        $("ul.notification__list").should(appear);
     }
 
     public CartModalWindowPage addProductToCart(int productIndex){
         clickAddProductToCartButton(productIndex);
-        checkAddProductNotification();
-        checkBuyButtonChangedState(productIndex);
+        checkAddProductNotificationAppears();
+        checkBuyButtonExists(productIndex);
         clickAddProductToCartButton(productIndex);
         return new CartModalWindowPage();
     }
