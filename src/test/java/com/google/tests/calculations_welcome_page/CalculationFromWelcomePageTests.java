@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalculationFromWelcomePageTests extends BaseTest {
 
     GoogleWelcomePage welcomePage = new GoogleWelcomePage();
-    GoogleResultsPage resultsPage = new GoogleResultsPage();
+    GoogleResultsPage resultsPage;
 
     @ParameterizedTest
     @CsvSource(value = {
@@ -28,7 +28,7 @@ public class CalculationFromWelcomePageTests extends BaseTest {
             "10/0, undefined"
     })
     public void calculateValuesOnWelcomePageTest(String arithmeticExpression, String result){
-        welcomePage.enterSearchedValue(arithmeticExpression);
+        resultsPage = welcomePage.enterSearchedValue(arithmeticExpression);
         String actualResult;
         if (arithmeticExpression.contains("/0")){
             actualResult = resultsPage.getCalculationResultZeroDivision();

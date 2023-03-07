@@ -10,35 +10,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalculationsTrickyTests extends BaseTest {
 
     static GoogleWelcomePage welcomePage = new GoogleWelcomePage();
-    GoogleResultsPage resultsPage = new GoogleResultsPage();
+    static GoogleResultsPage resultsPage;
     private String arithmeticExample;
 
     @BeforeAll
     public static void beforeSuite(){
-        welcomePage.enterSearchedValue(SEARCHED_VALUE);
+        resultsPage = welcomePage.enterSearchedValue(SEARCHED_VALUE);
     }
 
     @Test
-    public void verifyWrongEnteredDigitIsDeletedTest(){
+    public void wrongEnteredDigitIsDeletedTest(){
         arithmeticExample = "562*6664";
-        resultsPage.enterArithmeticExpressionUsingKeyboardButtons(arithmeticExample);
+        resultsPage.enterValuesInCalculationFieldUsingKeyboard(arithmeticExample);
         resultsPage.clickButtonOnWebCalculator("CE");
         assertEquals("562 × 666", resultsPage.getCalculationResult());
     }
 
     @Test
-    public void verifyCalculationHistoryIsSaved(){
+    public void calculationHistoryIsSavedTest(){
         arithmeticExample = "12 + 23";
-        resultsPage.calculateValuesUsingWebCalculator(arithmeticExample);
+        resultsPage.calculateArithmeticExpressionUsingWebCalculator(arithmeticExample);
         resultsPage.clickCalculationHistoryButton();
         assertEquals(arithmeticExample + " = 35", resultsPage.getLastArithmeticExampleFromHistory());
     }
 
     @Test
-    public void verifyPreviousActionsAreShownInMainWindowTest(){
+    public void previousActionsAreShownInMainWindowTest(){
         arithmeticExample = "2.5 × 2.5 =";
         String calculationResult = "Ans = 6.25";
-        resultsPage.calculateValuesUsingWebCalculator(arithmeticExample);
+        resultsPage.calculateArithmeticExpressionUsingWebCalculator(arithmeticExample);
         assertEquals(arithmeticExample, resultsPage.getPreviousCalculationOnMainWindow());
 
         resultsPage.clickButtonOnWebCalculator("CE");
@@ -49,9 +49,9 @@ public class CalculationsTrickyTests extends BaseTest {
     @Test
     public void navigatingThroughPreviousCalculationTest(){
         arithmeticExample = "23 + 23";
-        resultsPage.calculateValuesUsingWebCalculator(arithmeticExample);
+        resultsPage.calculateArithmeticExpressionUsingWebCalculator(arithmeticExample);
         resultsPage.clickCalculationHistoryButton();
-        resultsPage.clickOnLastArithmeticExample();
+        resultsPage.clickOnLastArithmeticExampleInHistoryWindow();
         assertEquals(arithmeticExample, resultsPage.getCalculationResult());
     }
 }

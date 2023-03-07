@@ -8,9 +8,9 @@ The current project includes:
 - Gradle
 - Allure Report
 
-test website: https://rozetka.com.ua/
+test website: https://rozetka.com.ua/,  https://google.com (calculator)
 
-The project contains tests in Selenide-style page objects with assertions inside.
+The project contains tests in Selenide-style page objects with assertions.
 
 Test Results are introduced by Allure Report
 

@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalculationsByKeyboardTests extends BaseTest {
 
     static GoogleWelcomePage welcomePage = new GoogleWelcomePage();
-    GoogleResultsPage resultsPage = new GoogleResultsPage();
+    static GoogleResultsPage resultsPage;
 
     @BeforeAll
     public static void beforeSuite(){
-        welcomePage.enterSearchedValue(SEARCHED_VALUE);
+        resultsPage = welcomePage.enterSearchedValue(SEARCHED_VALUE);
     }
 
     @ParameterizedTest(name = "{index} => {0}")
@@ -44,7 +44,7 @@ public class CalculationsByKeyboardTests extends BaseTest {
         tan()                          | t90                  | -1.99520041221
         ln()                           | le                   | 1
     """)
-    public void calculateValuesFromKeyboardTest(String description, String arithmeticExpression, String result){
+    public void calculatingValuesFromKeyboardTest(String description, String arithmeticExpression, String result){
         resultsPage.calculateArithmeticExpressionUsingKeyboard(arithmeticExpression);
         assertEquals(result, resultsPage.getCalculationResult());
     }

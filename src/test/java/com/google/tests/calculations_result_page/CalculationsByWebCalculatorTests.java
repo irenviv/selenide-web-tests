@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalculationsByWebCalculatorTests extends BaseTest {
 
     static GoogleWelcomePage welcomePage = new GoogleWelcomePage();
-    GoogleResultsPage resultsPage = new GoogleResultsPage();
+    static GoogleResultsPage resultsPage;
 
     @BeforeAll
     public static void beforeSuite(){
-        welcomePage.enterSearchedValue(SEARCHED_VALUE);
+        resultsPage = welcomePage.enterSearchedValue(SEARCHED_VALUE);
     }
 
     @ParameterizedTest
@@ -28,10 +28,9 @@ public class CalculationsByWebCalculatorTests extends BaseTest {
             "10×0, 0",
             "10÷0, undefined"  // failed, result: "Infinity", in other tests "undefined"
     })
-    public void verifyArithmeticOperationsByWebCalculatorTest(String expression, String expectedResult){
-        resultsPage.calculateValuesUsingWebCalculator(expression);
-        String actualResult = resultsPage.getCalculationResult();
-        assertEquals(expectedResult, actualResult);
+    public void arithmeticExamplesCalculationByWebCalculatorTest(String expression, String expectedResult){
+        resultsPage.calculateArithmeticExpressionUsingWebCalculator(expression);
+        assertEquals(expectedResult, resultsPage.getCalculationResult());
     }
 
     @ParameterizedTest(name = "{index} => calculates function: ({0}({1}) )")
@@ -45,9 +44,8 @@ public class CalculationsByWebCalculatorTests extends BaseTest {
         log   | 1    | 0
         '√ '  | 144  | 12       
     """)
-    public void calculateTrigonometryFunctionsByWebCalculatorTest(String function, String number, String result){
+    public void trigonometricFunctionsCalculationByWebCalculatorTest(String function, String number, String result){
         resultsPage.calculateTrigonometricFunctionUsingWebCalculator(function,number);
-        String actualResult = resultsPage.getCalculationResult();
-        assertEquals(result, actualResult);
+        assertEquals(result, resultsPage.getCalculationResult());
     }
 }

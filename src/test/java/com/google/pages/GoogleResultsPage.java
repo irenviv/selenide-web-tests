@@ -3,9 +3,7 @@ package com.google.pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
-
 import java.util.List;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -27,20 +25,20 @@ public class GoogleResultsPage {
         return calculation_result_undefined_value.getText();
     }
 
-    public void enterArithmeticExpressionUsingKeyboardButtons(String exp){
+    public void enterValuesInCalculationFieldUsingKeyboard(String exp){
         actions().moveToElement(calculation_field).click()
                 .sendKeys(Keys.CLEAR)
                 .sendKeys(exp)
                 .build().perform();
     }
 
-    public void clickEnterOnKeyboard(){
+    public void clickEnterButtonOnKeyboard(){
         actions().sendKeys(Keys.ENTER).build().perform();
     }
 
     public void calculateArithmeticExpressionUsingKeyboard(String exp){
-        enterArithmeticExpressionUsingKeyboardButtons(exp);
-        clickEnterOnKeyboard();
+        enterValuesInCalculationFieldUsingKeyboard(exp);
+        clickEnterButtonOnKeyboard();
     }
 
     public void clickButtonOnWebCalculator(String buttonValue){
@@ -49,7 +47,7 @@ public class GoogleResultsPage {
         }
     }
 
-    public void calculateValuesUsingWebCalculator(String arithmeticExpression){
+    public void calculateArithmeticExpressionUsingWebCalculator(String arithmeticExpression){
         char[] calcValues = arithmeticExpression.toCharArray();
             for(char s: calcValues){
                 clickButtonOnWebCalculator(String.valueOf(s));
@@ -59,7 +57,7 @@ public class GoogleResultsPage {
 
     public void calculateTrigonometricFunctionUsingWebCalculator(String function, String number){
         clickButtonOnWebCalculator(function);
-        calculateValuesUsingWebCalculator(number);
+        calculateArithmeticExpressionUsingWebCalculator(number);
     }
 
     public void clickCalculationHistoryButton(){
@@ -68,19 +66,18 @@ public class GoogleResultsPage {
     }
 
     public String getLastArithmeticExampleFromHistory(){
-        List<String> values = lastCalculationInHistory.texts();
-        String value = String.join("", values);
-        System.out.println("Calculation from history; " + value);
+        List<String> calculationValues = lastCalculationInHistory.texts();
+        String value = String.join("", calculationValues);
+        System.out.println("Calculation expression from history; " + value);
         return value;
     }
 
-    public void clickOnLastArithmeticExample(){
+    public void clickOnLastArithmeticExampleInHistoryWindow(){
         lastCalculationInHistory.get(0).click();
         calculation_history_window.should(disappear);
     }
 
     public String getPreviousCalculationOnMainWindow(){
-        String value = previous_calculations.getText();
-        return value;
+        return previous_calculations.getText();
     }
 }
